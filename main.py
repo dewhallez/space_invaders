@@ -7,7 +7,7 @@ import random
 pygame.font.init()
 
 # set game window heigh and width
-WIDTH, HEIGHT = 750, 750
+WIDTH, HEIGHT = 700, 700
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Space Shooter Game")
 
