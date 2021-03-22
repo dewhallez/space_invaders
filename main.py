@@ -3,13 +3,15 @@ import os
 import time
 import random
 
+# Font init
 pygame.font.init()
 
+# set game window heigh and width
 WIDTH, HEIGHT = 750, 750
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Space Shooter Tutorial")
+pygame.display.set_caption("Space Shooter Game")
 
-# Load images
+# images from asset file
 RED_SPACE_SHIP = pygame.image.load(os.path.join("assets", "pixel_ship_red_small.png"))
 GREEN_SPACE_SHIP = pygame.image.load(os.path.join("assets", "pixel_ship_green_small.png"))
 BLUE_SPACE_SHIP = pygame.image.load(os.path.join("assets", "pixel_ship_blue_small.png"))
@@ -17,13 +19,13 @@ BLUE_SPACE_SHIP = pygame.image.load(os.path.join("assets", "pixel_ship_blue_smal
 # Player player
 YELLOW_SPACE_SHIP = pygame.image.load(os.path.join("assets", "pixel_ship_yellow.png"))
 
-# Lasers
+# Lasers from asset file
 RED_LASER = pygame.image.load(os.path.join("assets", "pixel_laser_red.png"))
 GREEN_LASER = pygame.image.load(os.path.join("assets", "pixel_laser_green.png"))
 BLUE_LASER = pygame.image.load(os.path.join("assets", "pixel_laser_blue.png"))
 YELLOW_LASER = pygame.image.load(os.path.join("assets", "pixel_laser_yellow.png"))
 
-# Background
+# Game Background
 BG = pygame.transform.scale(pygame.image.load(os.path.join("assets", "background-black.png")), (WIDTH, HEIGHT))
 
 class Laser:
@@ -45,6 +47,8 @@ class Laser:
     def collision(self, obj):
         return collide(self, obj)
 
+
+# Ship Class
 
 class Ship:
     COOLDOWN = 25
@@ -92,6 +96,7 @@ class Ship:
         return self.ship_img.get_height()
 
 
+# create Player class
 class Player(Ship):
     def __init__(self, x, y, health=100):
         super().__init__(x, y, health)
@@ -117,10 +122,12 @@ class Player(Ship):
         super().draw(window)
         self.healthbar(window)
 
+# Health bar
     def healthbar(self, window):
         pygame.draw.rect(window, (255,0,0), (self.x, self.y + self.ship_img.get_height() + 10, self.ship_img.get_width(), 10))
         pygame.draw.rect(window, (0,255,0), (self.x, self.y + self.ship_img.get_height() + 10, self.ship_img.get_width() * (self.health/self.max_health), 10))
 
+# Enemy Ship class
 
 class Enemy(Ship):
     COLOR_MAP = {
@@ -149,6 +156,8 @@ def collide(obj1, obj2):
     offset_y = obj2.y - obj1.y
     return obj1.mask.overlap(obj2.mask, (offset_x, offset_y)) != None
 
+
+# game play 
 def main():
     run = True
     FPS = 60
@@ -244,6 +253,7 @@ def main():
 
         player.move_lasers(-laser_vel, enemies)
 
+# Game main menu
 def main_menu():
     title_font = pygame.font.SysFont("comicsans", 70)
     run = True
