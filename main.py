@@ -47,7 +47,7 @@ class Laser:
 
 
 class Ship:
-    COOLDOWN = 30
+    COOLDOWN = 25
 
     def __init__(self, x, y, health=100):
         self.x = x
@@ -164,7 +164,7 @@ def main():
     player_vel = 5
     laser_vel = 5
 
-    player = Player(300, 630)
+    player = Player(300, 600)
 
     clock = pygame.time.Clock()
 
